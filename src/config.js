@@ -9,6 +9,12 @@ import { PATH_DASHBOARD } from './routes/paths';
 export const HOST_API = process.env.REACT_APP_HOST_API_KEY || '';
 
 export const FIREBASE_API = {
+  // apiKey: 'AIzaSyCD9Of0Y4Jdefw4epT8lvvXOZsH5TRxkTc',
+  // authDomain: 'fly0-minui.firebaseapp.com',
+  // projectId: 'fly0-minui',
+  // storageBucket: 'fly0-minui.appspot.com',
+  // messagingSenderId: '337088724288',
+  // appId: '1:337088724288:web:4b41f7550d80de8c8b0ea5',
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,

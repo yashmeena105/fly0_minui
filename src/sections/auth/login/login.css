@@ -1,0 +1,10 @@
+.socialBtn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.socialBtn:hover {
+  background-color: rgb(114, 121, 103);
+  cursor: pointer;
+}

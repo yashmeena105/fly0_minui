@@ -65,7 +65,7 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-
+        { path: 'dash', element: <Fly0Dashboard /> },
         { path: 'marketplace', element: <Fly0Marketplace /> },
         { path: 'myOrders', element: <Fly0MyOrders /> },
         { path: 'leads', element: <Fly0Leads /> },
@@ -188,6 +188,7 @@ const NewPassword = Loadable(lazy(() => import('../pages/auth/NewPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 
 // DASHBOARD
+const Fly0Dashboard = Loadable(lazy(() => import('../pages/dashboard/Fly0Dashboard')));
 const Fly0Marketplace = Loadable(lazy(() => import('../pages/dashboard/Fly0Marketplace')));
 const Fly0MyOrders = Loadable(lazy(() => import('../pages/dashboard/Fly0MyOrders')));
 const Fly0Leads = Loadable(lazy(() => import('../pages/dashboard/Fly0Leads')));

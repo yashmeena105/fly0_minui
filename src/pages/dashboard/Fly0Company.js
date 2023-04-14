@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Fly0Company = () => {
-  return (
-    <div>
-      Company
-    </div>
-  )
-}
+  return <div>Company</div>;
+};
 
-export default Fly0Company
+export default Fly0Company;

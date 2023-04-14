@@ -37,6 +37,8 @@ export const PATH_PAGE = {
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   fly0: {
+    root: path(ROOTS_DASHBOARD, '/buy'),
+    dash: path(ROOTS_DASHBOARD, '/dash'),
     marketplace: path(ROOTS_DASHBOARD, '/marketplace'),
     myListings: path(ROOTS_DASHBOARD, '/myListings'),
     myOrders: path(ROOTS_DASHBOARD, '/myOrders'),

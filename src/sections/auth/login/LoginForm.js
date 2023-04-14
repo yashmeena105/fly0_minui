@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { Button, Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
 import { PATH_AUTH } from '../../../routes/paths';
@@ -20,6 +20,17 @@ import './login.css';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const { googleSignIn } = useAuth();
+  const navigate = useNavigate();
+  const googleRegisterHandler = async () => {
+    try {
+      console.log('google login');
+      await googleSignIn();
+      navigate('/dashboard/app');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const { login } = useAuth();
 
   const isMountedRef = useIsMountedRef();
@@ -54,7 +65,7 @@ export default function LoginForm() {
     try {
       await login(data.email, data.password);
     } catch (error) {
-      console.error(error,"onsubmit errr");
+      console.error(error, 'onsubmit errr');
 
       reset();
 
@@ -112,9 +123,16 @@ export default function LoginForm() {
           className="css-128z9w6 btns"
           style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}
         >
-          <LoadingButton fullWidth size="large" type="submit" variant="outlined" loading={isSubmitting}>
+          <Button
+            fullWidth
+            size="large"
+            variant="outlined"
+            type="submit"
+            onClick={googleRegisterHandler}
+            startIcon={<Iconify icon={'mdi:google'} width={20} height={20} />}
+          >
             Continue with Google
-          </LoadingButton>
+          </Button>
         </div>
       </div>
     </FormProvider>

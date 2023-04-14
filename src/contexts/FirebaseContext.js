@@ -7,10 +7,14 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 //
 import { FIREBASE_API } from '../config';
+
+//
 
 // ----------------------------------------------------------------------
 
@@ -87,11 +91,17 @@ function AuthProvider({ children }) {
     [dispatch]
   );
 
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    const data = await signInWithPopup(AUTH, provider);
+    return data;
+  };
+
   const login = (email, password) => signInWithEmailAndPassword(AUTH, email, password);
 
-  const register = (email, password, firstName, lastName) =>
-  //  console.log('registering', email);
-    createUserWithEmailAndPassword(AUTH, email, password).then(async (res) => {
+  const register = (email, password, firstName, lastName) => {
+    console.log('registering', email);
+    return createUserWithEmailAndPassword(AUTH, email, password).then(async (res) => {
       const userRef = doc(collection(DB, 'users'), res.user?.uid);
       // console.log('registering', email);
       await setDoc(userRef, {
@@ -100,6 +110,7 @@ function AuthProvider({ children }) {
         displayName: `${firstName} ${lastName}`,
       });
     });
+  };
 
   const logout = () => signOut(AUTH);
 
@@ -123,6 +134,7 @@ function AuthProvider({ children }) {
           about: profile?.about || '',
           isPublic: profile?.isPublic || false,
         },
+        googleSignIn,
         login,
         register,
         logout,

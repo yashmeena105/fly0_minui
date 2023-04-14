@@ -28,7 +28,7 @@ const ICONS = {
   myOrders: getIcon(''),
   leads: getIcon(''),
   myListings: getIcon(''),
-  customerPayments: getIcon(''),
+  customerPayments: getIcon('ic_invoice'),
   supplierBilling: getIcon(''),
   me: getIcon(''),
   company: getIcon(''),
@@ -38,75 +38,43 @@ const ICONS = {
 };
 
 const navConfig = [
-  // {
-  //   subheader: '',
-  //   items: [
-  //     { title: 'Marketplace', path: PATH_DASHBOARD.fly0.marketplace, icon: ICONS.dashboard },
-  //     { title: 'My Orders', path: PATH_DASHBOARD.fly0.myOrders, icon: ICONS.ecommerce },
-  //     { title: 'Leads', path: PATH_DASHBOARD.fly0.leads, icon: ICONS.analytics },
-  //     { title: 'My Listings', path: PATH_DASHBOARD.fly0.myListings, icon: ICONS.banking },
-  //     { title: 'Customer Payments', path: PATH_DASHBOARD.fly0.customerPayments, icon: ICONS.booking },
-  //     { title: 'Supplier Billing', path: PATH_DASHBOARD.fly0.supplierBilling, icon: ICONS.booking },
-  //     { title: 'Me', path: PATH_DASHBOARD.fly0.me, icon: ICONS.booking },
-  //     { title: 'Company', path: PATH_DASHBOARD.fly0.company, icon: ICONS.booking },
-  //     { title: 'Team', path: PATH_DASHBOARD.fly0.team, icon: ICONS.booking },
-  //     { title: 'FAQs', path: PATH_DASHBOARD.fly0.faqs, icon: ICONS.booking },
-  //     { title: 'Support', path: PATH_DASHBOARD.fly0.support, icon: ICONS.booking },
-  //   ],
-  // },
-
   {
-    subheader: '',
+    subheader: 'Home',
     items: [
       { title: 'Dashboard', path: PATH_DASHBOARD.fly0.dash, icon: ICONS.dashboard },
-      {
-        title: 'Buy',
-        path: PATH_DASHBOARD.fly0.root,
-        icon: ICONS.cart,
-        children: [
-          { title: 'Marketplace', path: PATH_DASHBOARD.fly0.marketplace, icon: ICONS.dashboard },
-          { title: 'My Orders', path: PATH_DASHBOARD.fly0.myOrders, icon: ICONS.ecommerce },
-        ],
-      },
-      {
-        title: 'Sell',
-        path: PATH_DASHBOARD.fly0.root,
-        icon: ICONS.cart,
-        children: [
-          { title: 'Leads', path: PATH_DASHBOARD.fly0.leads, icon: ICONS.analytics },
-          { title: 'My Listings', path: PATH_DASHBOARD.fly0.myListings, icon: ICONS.banking },
-        ],
-      },
-      {
-        title: 'Finance',
-        path: PATH_DASHBOARD.fly0.root,
-        icon: ICONS.banking,
-        children: [
-          { title: 'Customer Payments', path: PATH_DASHBOARD.fly0.customerPayments, icon: ICONS.booking },
-          { title: 'Supplier Billing', path: PATH_DASHBOARD.fly0.supplierBilling, icon: ICONS.booking },
-        ],
-      },
-      {
-        title: 'setting',
-        path: PATH_DASHBOARD.fly0.root,
-        icon: ICONS.mail,
-        children: [
-          { title: 'Me', path: PATH_DASHBOARD.fly0.me, icon: ICONS.user },
-          { title: 'Company', path: PATH_DASHBOARD.fly0.company, icon: ICONS.analytics },
-          { title: 'Team', path: PATH_DASHBOARD.fly0.team, icon: ICONS.user },
-        ],
-      },
-      {
-        title: 'help',
-        path: PATH_DASHBOARD.fly0.root,
-        icon: ICONS.chat,
-        children: [
-          { title: 'FAQs', path: PATH_DASHBOARD.fly0.faqs, icon: ICONS.booking },
-          { title: 'Support', path: PATH_DASHBOARD.fly0.support, icon: ICONS.booking },
-        ],
-      },
-    ],
+      { title: 'Leads', path: PATH_DASHBOARD.fly0.leads, icon: ICONS.customerPayments },
+      { title: 'Inquiries', path: PATH_DASHBOARD.fly0.myOrders, icon: ICONS.chat },
+    ]
   },
+  {
+    subheader: "Buy • Sell",
+    items: [
+      { title: 'Marketplace', path: PATH_DASHBOARD.fly0.marketplace, icon: ICONS.dashboard },
+      { title: 'My Listings', path: PATH_DASHBOARD.fly0.myListings, icon: ICONS.banking },
+    ]
+  },
+  {
+    subheader: "Finance",
+    items: [
+      { title: 'Customer Payments', path: PATH_DASHBOARD.fly0.customerPayments, icon: ICONS.booking },
+      { title: 'Supplier Billing', path: PATH_DASHBOARD.fly0.supplierBilling, icon: ICONS.booking },
+    ]
+  },
+  {
+    subheader: "SETTINGS",
+    items: [
+      { title: 'Me', path: PATH_DASHBOARD.fly0.me, icon: ICONS.user },
+      { title: 'Company', path: PATH_DASHBOARD.fly0.company, icon: ICONS.analytics },
+      { title: 'Team', path: PATH_DASHBOARD.fly0.team, icon: ICONS.user },
+    ]
+  },
+  {
+    subheader: "HELP",
+    items: [
+      { title: 'FAQs', path: PATH_DASHBOARD.fly0.faqs, icon: ICONS.booking, },
+      { title: 'Support', path: PATH_DASHBOARD.fly0.support, icon: ICONS.booking },
+    ]
+  }
   // {
   //   items: [
   //     {

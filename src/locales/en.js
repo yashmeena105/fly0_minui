@@ -13,7 +13,7 @@ const en = {
   docs: {
     hi: `Hi`,
     description: `Need help? \n Please check our docs.`,
-    documentation: `documentation`,
+    documentation: `Contact Us`,
   },
   app: `app`,
   user: `user`,

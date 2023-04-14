@@ -65,6 +65,19 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+
+        { path: 'marketplace', element: <Fly0Marketplace /> },
+        { path: 'myOrders', element: <Fly0MyOrders /> },
+        { path: 'leads', element: <Fly0Leads /> },
+        { path: 'myListings', element: <Fly0MyListings /> },
+        { path: 'customerPayments', element: <Fly0CustomerPayments /> },
+        { path: 'supplierBillings', element: <Fly0SupplierBillings /> },
+        { path: 'me', element: <Fly0Me /> },
+        { path: 'team', element: <Fly0Team /> },
+        { path: 'company', element: <Fly0Company /> },
+        { path: 'faqs', element: <Fly0Faqs /> },
+        { path: 'support', element: <Fly0Support /> },
+
         { path: 'app', element: <GeneralApp /> },
         { path: 'ecommerce', element: <GeneralEcommerce /> },
         { path: 'analytics', element: <GeneralAnalytics /> },
@@ -175,6 +188,17 @@ const NewPassword = Loadable(lazy(() => import('../pages/auth/NewPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 
 // DASHBOARD
+const Fly0Marketplace = Loadable(lazy(() => import('../pages/dashboard/Fly0Marketplace')));
+const Fly0MyOrders = Loadable(lazy(() => import('../pages/dashboard/Fly0MyOrders')));
+const Fly0Leads = Loadable(lazy(() => import('../pages/dashboard/Fly0Leads')));
+const Fly0MyListings = Loadable(lazy(() => import('../pages/dashboard/Fly0MyListings')));
+const Fly0CustomerPayments = Loadable(lazy(() => import('../pages/dashboard/Fly0CustomerPayments')));
+const Fly0SupplierBillings = Loadable(lazy(() => import('../pages/dashboard/Fly0SupplierBillings')));
+const Fly0Me = Loadable(lazy(() => import('../pages/dashboard/Fly0Me')));
+const Fly0Team = Loadable(lazy(() => import('../pages/dashboard/Fly0Team')));
+const Fly0Company = Loadable(lazy(() => import('../pages/dashboard/Fly0Company')));
+const Fly0Faqs = Loadable(lazy(() => import('../pages/dashboard/Fly0Faqs')));
+const Fly0Support = Loadable(lazy(() => import('../pages/dashboard/Fly0Support')));
 
 // GENERAL
 const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));

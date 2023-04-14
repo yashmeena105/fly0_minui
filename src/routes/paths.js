@@ -36,6 +36,19 @@ export const PATH_PAGE = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  fly0: {
+    marketplace: path(ROOTS_DASHBOARD, '/marketplace'),
+    myListings: path(ROOTS_DASHBOARD, '/myListings'),
+    myOrders: path(ROOTS_DASHBOARD, '/myOrders'),
+    leads: path(ROOTS_DASHBOARD, '/leads'),
+    customerPayments: path(ROOTS_DASHBOARD, '/customerPayments'),
+    supplierBilling: path(ROOTS_DASHBOARD, '/supplierBillings'),
+    me: path(ROOTS_DASHBOARD, '/me'),
+    company: path(ROOTS_DASHBOARD, '/company'),
+    team: path(ROOTS_DASHBOARD, '/team'),
+    faqs: path(ROOTS_DASHBOARD, '/faqs'),
+    support: path(ROOTS_DASHBOARD, '/support'),
+  },
   general: {
     app: path(ROOTS_DASHBOARD, '/app'),
     ecommerce: path(ROOTS_DASHBOARD, '/ecommerce'),

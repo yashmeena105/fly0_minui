@@ -24,12 +24,41 @@ const ICONS = {
   analytics: getIcon('ic_analytics'),
   dashboard: getIcon('ic_dashboard'),
   menuItem: getIcon('ic_menu_item'),
+  marketplace: getIcon(''),
+  myOrders: getIcon(''),
+  leads: getIcon(''),
+  myListings: getIcon(''),
+  customerPayments: getIcon(''),
+  supplierBilling: getIcon(''),
+  me: getIcon(''),
+  company: getIcon(''),
+  team: getIcon(''),
+  faqs: getIcon(''),
+  support: getIcon(''),
 };
 
 const navConfig = [
+  {
+    subheader: 'Dashboard',
+    items: [
+      { title: 'Marketplace', path: PATH_DASHBOARD.fly0.marketplace, icon: ICONS.dashboard },
+      { title: 'My Orders', path: PATH_DASHBOARD.fly0.myOrders, icon: ICONS.ecommerce },
+      { title: 'Leads', path: PATH_DASHBOARD.fly0.leads, icon: ICONS.analytics },
+      { title: 'My Listings', path: PATH_DASHBOARD.fly0.myListings, icon: ICONS.banking },
+      { title: 'Customer Payments', path: PATH_DASHBOARD.fly0.customerPayments, icon: ICONS.booking },
+      { title: 'Supplier Billing', path: PATH_DASHBOARD.fly0.supplierBilling, icon: ICONS.booking },
+      { title: 'Me', path: PATH_DASHBOARD.fly0.me, icon: ICONS.booking },
+      { title: 'Company', path: PATH_DASHBOARD.fly0.company, icon: ICONS.booking },
+      { title: 'Team', path: PATH_DASHBOARD.fly0.team, icon: ICONS.booking },
+      { title: 'FAQs', path: PATH_DASHBOARD.fly0.faqs, icon: ICONS.booking },
+      { title: 'Support', path: PATH_DASHBOARD.fly0.support, icon: ICONS.booking },
+    ],
+  },
+  /*
   // GENERAL
   // ----------------------------------------------------------------------
   {
+
     subheader: 'general',
     items: [
       { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
@@ -39,7 +68,7 @@ const navConfig = [
       { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
     ],
   },
-
+  /*
   // MANAGEMENT
   // ----------------------------------------------------------------------
   {
@@ -188,6 +217,7 @@ const navConfig = [
       { title: 'item_external_link', path: 'https://www.google.com/', icon: ICONS.menuItem },
     ],
   },
+  */
 ];
 
 export default navConfig;

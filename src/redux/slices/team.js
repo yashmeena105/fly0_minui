@@ -66,7 +66,7 @@ const slice = createSlice({
 
     // SELECT MEMBER
     selectMember(state, action) {
-      const memberId = action.payload;
+      const memberId = action.payload._id;
       state.isOpenModal = true;
       state.selectedMemberId = memberId;
     },

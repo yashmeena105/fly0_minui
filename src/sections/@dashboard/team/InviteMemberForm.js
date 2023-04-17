@@ -16,10 +16,13 @@ import { createMember, updateMember, deleteMember } from '../../../redux/slices/
 // components
 import Iconify from '../../../components/Iconify';
 import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+import { FormProvider, RHFSelect, RHFTextField, RHFSwitch } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
-
+const roles = [
+  'MEMBER',
+  'ADMIN'
+]
 const COLOR_OPTIONS = [
   '#00AB55', // theme.palette.primary.main,
   '#1890FF', // theme.palette.info.main,
@@ -89,8 +92,8 @@ export default function InviteMemberForm({ member, onCancel }) {
         start: data.start,
         end: data.end,
       };
-      if (member.id) {
-        dispatch(updateMember(member.id, newMember));
+      if (member._id) {
+        dispatch(updateMember(member._id, newMember));
         enqueueSnackbar('Update success!');
       } else {
         enqueueSnackbar('Create success!');
@@ -104,10 +107,10 @@ export default function InviteMemberForm({ member, onCancel }) {
   };
 
   const handleDelete = async () => {
-    if (!member.id) return;
+    if (!member._id) return;
     try {
       onCancel();
-      dispatch(deleteMember(member.id));
+      dispatch(deleteMember(member._id));
       enqueueSnackbar('Delete success!');
     } catch (error) {
       console.error(error);
@@ -121,52 +124,19 @@ export default function InviteMemberForm({ member, onCancel }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ p: 3 }}>
-        <RHFTextField name="title" label="Title" />
+        <RHFTextField name="userInfo.display_name" label="Name" disabled />
 
-        <RHFTextField name="description" label="Description" multiline rows={4} />
+        <RHFTextField name="userInfo.email" label="Email" disabled />
 
-        <RHFSwitch name="allDay" label="All day" />
+        <RHFSelect name="role" label="Role" placeholder="Select Role">
+          <option value="" />
+          {roles.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </RHFSelect>
 
-        <Controller
-          name="start"
-          control={control}
-          render={({ field }) => (
-            <MobileDateTimePicker
-              {...field}
-              label="Start date"
-              inputFormat="dd/MM/yyyy hh:mm a"
-              renderInput={(params) => <TextField {...params} fullWidth />}
-            />
-          )}
-        />
-
-        <Controller
-          name="end"
-          control={control}
-          render={({ field }) => (
-            <MobileDateTimePicker
-              {...field}
-              label="End date"
-              inputFormat="dd/MM/yyyy hh:mm a"
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  error={!!isDateError}
-                  helperText={isDateError && 'End date must be later than start date'}
-                />
-              )}
-            />
-          )}
-        />
-
-        <Controller
-          name="textColor"
-          control={control}
-          render={({ field }) => (
-            <ColorSinglePicker value={field.value} onChange={field.onChange} colors={COLOR_OPTIONS} />
-          )}
-        />
       </Stack>
 
       <DialogActions>
@@ -184,7 +154,7 @@ export default function InviteMemberForm({ member, onCancel }) {
         </Button>
 
         <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-          Add
+          {isCreating ? "Add" : "Update"}
         </LoadingButton>
       </DialogActions>
     </FormProvider>

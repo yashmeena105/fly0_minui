@@ -84,7 +84,7 @@ const TABLE_HEAD = [
 const selectedMemberSelector = (state) => {
   const { members, selectedMemberId } = state.team;
   if (selectedMemberId) {
-    return members.find((_member) => _member.id === selectedMemberId);
+    return members.find((_member) => _member._id === selectedMemberId);
   }
   return null;
 };
@@ -164,8 +164,9 @@ export default function UserList() {
     setTableData(deleteRows);
   };
 
-  const handleEditRow = (id) => {
-    navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
+  const handleEditRow = (arg) => {
+    console.log("EDIT", arg)
+    dispatch(selectMember(arg));
   };
 
   const dataFiltered = applySortFilter({
@@ -294,16 +295,21 @@ export default function UserList() {
                 />
 
                 <TableBody>
-                  {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <UserTableRow
-                      key={row._id}
-                      row={row}
-                      selected={selected.includes(row._id)}
-                      onSelectRow={() => onSelectRow(row._id)}
-                      onDeleteRow={() => handleDeleteRow(row._id)}
-                      onEditRow={() => handleEditRow(row.userInfo.display_name)}
-                    />
-                  ))}
+                  {(isLoading ? [...Array(rowsPerPage)] : dataFiltered)
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) =>
+                      row ? (<UserTableRow
+                        key={row._id}
+                        row={row}
+                        selected={selected.includes(row._id)}
+                        onSelectRow={() => onSelectRow(row._id)}
+                        onDeleteRow={() => handleDeleteRow(row._id)}
+                        onEditRow={() => handleEditRow(row)}
+                      />
+                      ) : (
+                        !isNotFound && <TableSkeleton key={index} sx={{ height: denseHeight }} />
+                      )
+                    )}
 
                   <TableEmptyRows height={denseHeight} emptyRows={emptyRows(page, rowsPerPage, tableData.length)} />
 
@@ -334,7 +340,6 @@ export default function UserList() {
 
         <DialogAnimate open={isOpenModal} onClose={handleCloseModal}>
           <DialogTitle>{selectedMember ? 'Edit Member' : 'Add Member'}</DialogTitle>
-
           <InviteMemberForm member={selectedMember || {}} onCancel={handleCloseModal} />
         </DialogAnimate>
       </Container>

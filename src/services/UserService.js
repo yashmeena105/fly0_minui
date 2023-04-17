@@ -4,9 +4,10 @@ import paths from './apiConstants'
 /**
  * @param payload
  */
+/* eslint class-methods-use-this: ["error", { "enforceForClassFields": false }] */
 class UserService {
 
-  static addNotificationToken = async () => {
+  addNotificationToken = async () => {
     const token = localStorage.getItem("notificationToken");
     const response = await Helpers.post({
       url: `${paths.notificationToken}`,
@@ -15,14 +16,14 @@ class UserService {
     return response;
   }
 
-  static getMyProfile = async () => {
+  getMyProfile = async () => {
     const response = await Helpers.get({
       url: `${paths.profile}`,
     });
     return response;
   }
 
-  static createMyProfile = async (payload) => {
+  createMyProfile = async (payload) => {
     const response = await Helpers.post({
       url: `${paths.profile}`,
       data: payload
@@ -30,7 +31,7 @@ class UserService {
     return response;
   }
 
-  static updateMyProfile = async (payload) => {
+  updateMyProfile = async (payload) => {
     const response = await Helpers.put({
       url: `${paths.profile}`,
       data: payload
@@ -39,7 +40,7 @@ class UserService {
   }
 
 
-  static updateCompany = async (payload) => {
+  updateCompany = async (payload) => {
     const response = await Helpers.put({
       url: `${paths.updateCompanyDetail}`,
       data: payload
@@ -47,7 +48,7 @@ class UserService {
     return response;
   }
 
-  static updateCompanyLogo = async (payload) => {
+  updateCompanyLogo = async (payload) => {
     const response = await Helpers.put({
       url: `${paths.companyLogo}`,
       data: payload
@@ -55,13 +56,12 @@ class UserService {
     return response;
   }
 
-  static getCompanyMembers = async () => {
+  getCompanyMembers = async () => {
     const response = await Helpers.get({
       url: `${paths.getCompanyMembers}`,
     });
     return response;
   }
-
 
 }
 export default new UserService();

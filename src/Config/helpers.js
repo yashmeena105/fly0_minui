@@ -12,9 +12,7 @@ if (stage === 'prod') CONFIG = PROD_CONFIG; else if (stage === 'dev') CONFIG = D
 
 export const serverEndpoint = CONFIG.serverEndPoint;
 
-/**
- *
- */
+/* eslint class-methods-use-this: ["error", { "enforceForClassFields": false }] */
 class Helpers {
   /**
    * fetchHelper
@@ -22,7 +20,7 @@ class Helpers {
    * @param {object} reqParams parameters for request
    * @return {Promise} for parameters
    */
-  static fetchHelper = (reqParams) => {
+  fetchHelper = (reqParams) => {
     const {
       url, method, headers = {}, data, file,
     } = reqParams;
@@ -178,7 +176,7 @@ class Helpers {
    * @param date
    * @return {string}
    */
-  static timeSinceDate = (date) => {
+  timeSinceDate = (date) => {
     const seconds = Math.floor((new Date() - date) / 1000);
     let interval = Math.floor(seconds / 31536000);
     if (interval > 1) {
@@ -208,7 +206,7 @@ class Helpers {
    * @param email
    * @return {boolean}
    */
-  static validateEmail = (email) => {
+  validateEmail = (email) => {
     if (/^[+\w]+([.-]?[+\w]+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       return true;
     }
@@ -220,7 +218,7 @@ class Helpers {
    * @param phone
    * @return {boolean}
    */
-  static validatePhoneNumber(phone) {
+  validatePhoneNumber = (phone) => {
     if (/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/.test(phone)) {
       return true;
     }
@@ -230,7 +228,7 @@ class Helpers {
   /**
    *
    */
-  static scrollToTop() {
+  scrollToTop = () => {
     document.getElementById('scroller').scroll(0, 0);
   }
 }

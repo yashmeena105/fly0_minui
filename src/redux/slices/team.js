@@ -94,6 +94,7 @@ export const { openModal, closeModal, selectMember } = slice.actions;
 
 export function getMembers() {
   return async () => {
+    console.log("Getting members")
     dispatch(slice.actions.startLoading());
     try {
       const resp = await UserService.getCompanyMembers();

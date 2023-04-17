@@ -71,6 +71,11 @@ function AuthProvider({ children }) {
         if (user) {
           const userRef = doc(DB, 'users', user.uid);
 
+          // TODO: Send authToken in api request headers
+          // Temporary solution to uid problem for fetchHelper
+          // sends uid in header of all api requests for now
+          localStorage.setItem('uid', user?.uid)
+
           const docSnap = await getDoc(userRef);
 
           if (docSnap.exists()) {

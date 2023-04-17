@@ -1,5 +1,5 @@
 import { paramCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
@@ -23,7 +23,7 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem,
+  MenuItem, Stack, DialogTitle
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -41,7 +41,12 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import { TableEmptyRows, TableHeadCustom, TableNoData, TableSelectedActions } from '../../components/table';
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
-
+// sections
+import { InviteMemberForm } from '../../sections/@dashboard/team';
+import { DialogAnimate } from '../../components/animate';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getMembers, openModal, closeModal, updateMember, selectMember } from '../../redux/slices/team';
 // ----------------------------------------------------------------------
 
 const STATUS_OPTIONS = ['all'];
@@ -70,6 +75,14 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
+const selectedMemberSelector = (state) => {
+  const { members, selectedMemberId } = state.team;
+  if (selectedMemberId) {
+    return members.find((_member) => _member.id === selectedMemberId);
+  }
+  return null;
+};
+
 export default function UserList() {
   const {
     dense,
@@ -94,6 +107,8 @@ export default function UserList() {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const [tableData, setTableData] = useState(_userList);
 
   const [filterName, setFilterName] = useState('');
@@ -102,7 +117,19 @@ export default function UserList() {
 
   const [role, setrole] = useState('');
 
+  const selectedMember = useSelector(selectedMemberSelector);
+
+  const { members, isOpenModal } = useSelector((state) => state.team);
+
   const { currentTab: filterStatus, onChangeTab: onChangeFilterStatus } = useTabs('all');
+
+  useEffect(() => {
+    dispatch(getMembers());
+  }, [dispatch]);
+
+  const handleSelectMember = (arg) => {
+    dispatch(selectMember(arg.member._id));
+  };
 
   const handleFilterName = (filterName) => {
     setFilterName(filterName);
@@ -144,6 +171,15 @@ export default function UserList() {
     (!dataFiltered.length && !!filterRole) ||
     (!dataFiltered.length && !!filterStatus);
 
+
+  const handleAddMember = () => {
+    dispatch(openModal());
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
+
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -155,8 +191,8 @@ export default function UserList() {
             { name: 'List' },
           ]}
           action={
-            <div style={{ display: 'flex' }}>
-              <TextField id="outlined-basic" label="Invite" variant="outlined" style={{ width: '30vw' }} />
+            <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ py: 2.5, px: 3 }}>
+              {/* <TextField id="outlined-basic" label="Invite" variant="outlined" style={{ width: '30vw' }} />
 
               <FormControl style={{ width: '100px' }}>
                 <InputLabel id="demo-simple-select-label">Role</InputLabel>
@@ -166,25 +202,22 @@ export default function UserList() {
                   id="demo-simple-select"
                   value={role}
                   label="role"
-                  // onChange={handleChange}
+                // onChange={handleChange}
                 >
                   <MenuItem>Admin</MenuItem>
                   <MenuItem>Member</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
               <Button
                 variant="contained"
                 style={{ width: '10vw' }}
-                // component={RouterLink}
-                // to={PATH_DASHBOARD.user.new}
-                // startIcon={<Iconify icon={'eva:plus-fill'} />}
+                onClick={handleAddMember} startIcon={<Iconify icon={'eva:plus-fill'} width={20} height={20} />}
               >
-                Invite User
+                Invite
               </Button>
-            </div>
+            </Stack>
           }
         />
-
         <Card>
           <Tabs
             allowScrollButtonsMobile
@@ -286,6 +319,12 @@ export default function UserList() {
             />
           </Box>
         </Card>
+
+        <DialogAnimate open={isOpenModal} onClose={handleCloseModal}>
+          <DialogTitle>{selectedMember ? 'Edit Member' : 'Add Member'}</DialogTitle>
+
+          <InviteMemberForm member={selectedMember || {}} onCancel={handleCloseModal} />
+        </DialogAnimate>
       </Container>
     </Page>
   );
